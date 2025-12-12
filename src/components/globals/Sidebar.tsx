@@ -91,7 +91,7 @@ const Sidebar: React.FC<SidebarProps> = ({
               {isOpen ? (
                 <div className="space-y-3">
                   <a
-                    href="https://github.com"
+                    href="https://github.com/sudoAdmin10/TicsaTest"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 px-3 py-2 text-lime-800 hover:bg-lime-100/50 rounded-lg transition-colors">
@@ -119,7 +119,7 @@ const Sidebar: React.FC<SidebarProps> = ({
 
                 <div className="flex flex-col items-center gap-3">
                   <a
-                    href="https://github.com"
+                    href="https://github.com/sudoAdmin10/TicsaTest"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-2 text-lime-700 hover:bg-lime-100/50 rounded-lg transition-colors"
@@ -194,7 +194,7 @@ const Sidebar: React.FC<SidebarProps> = ({
               <div className="p-4 border-t border-b border-gray-200">
                 <div className="space-y-3">
                   <a
-                    href="https://github.com"
+                    href="https://github.com/sudoAdmin10/TicsaTest"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
