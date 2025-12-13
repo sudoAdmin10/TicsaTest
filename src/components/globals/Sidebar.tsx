@@ -17,7 +17,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   tonggle,
   isMobile = false
 }) => {
-  const handleNavigation = (itemId: string) => {
+  const navigation = (itemId: string) => {
     if (navigate) {
       navigate(itemId);
     }
@@ -63,7 +63,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                   return (
                     <li key={item.id}>
                       <button
-                        onClick={() => handleNavigation(item.id)}
+                        onClick={() => navigation(item.id)}
                         className={`
                           w-full flex items-center gap-3 px-3 py-3 rounded-lg
                           transition-all duration-200
@@ -171,7 +171,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                     return (
                       <li key={item.id}>
                         <button
-                          onClick={() => handleNavigation(item.id)}
+                          onClick={() => navigation(item.id)}
                           className={`
                             w-full flex items-center gap-3 px-3 py-3 rounded-lg
                             transition-all duration-200

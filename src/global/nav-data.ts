@@ -1,11 +1,4 @@
-import { CardSimIcon, Home, Table2, type LucideIcon } from "lucide-react";
-
-export interface NavItemModel {
-  id: string;
-  label: string;
-  icon: LucideIcon;
-  url: string;
-}
+import { CardSimIcon, Home, Table2 } from "lucide-react";
 
 export const navItems = [
   {

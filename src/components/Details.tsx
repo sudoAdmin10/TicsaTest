@@ -1,14 +1,14 @@
 import React from 'react';
-import type { Post } from '../store/types';
+import type { PostModel } from '../store/types';
 import { FileText, X, User, Globe, FileDigit } from 'lucide-react';
 
 interface PostDetailsProps {
-  post: Post;
+  post: PostModel;
   onClose: () => void;
   isOpen: boolean;
 }
 
-const PostDetails: React.FC<PostDetailsProps> = ({ post, onClose, isOpen }) => {
+const PostDetailsComponent: React.FC<PostDetailsProps> = ({ post, onClose, isOpen }) => {
   if (!isOpen) return null;
 
   return (
@@ -135,4 +135,4 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post, onClose, isOpen }) => {
   );
 };
 
-export default PostDetails;
+export default PostDetailsComponent;

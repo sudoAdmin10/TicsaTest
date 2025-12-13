@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import type { Post } from '../../store/types';
+import type { PostModel } from '../../store/types';
 import { FileText, Grid, LayoutGrid } from 'lucide-react';
 import PublicationsCard from '../../components/Card';
-import PostDetails from '../../components/Details';
+import PostDetailsComponent from '../../components/Details';
 
 interface CardsViewProps {
-  posts: Post[];
-  onEdit: (post: Post) => void;
+  posts: PostModel[];
+  onEdit: (post: PostModel) => void;
   onDelete: (id: number) => void;
 }
 
@@ -73,11 +73,7 @@ const CardsViewPage: React.FC<CardsViewProps> = ({ posts, onEdit, onDelete }) =>
       </div>
 
       {selectedPost && (
-        <PostDetails
-          post={selectedPost}
-          onClose={handleCloseDetails}
-          isOpen={isDetailsOpen}
-        />
+        <PostDetailsComponent post={selectedPost} onClose={handleCloseDetails} isOpen={isDetailsOpen}/>
       )}
 
       <div className="flex items-center justify-between pt-4">

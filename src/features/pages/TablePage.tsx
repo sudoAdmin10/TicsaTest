@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import type { Post } from '../../store/types';
+import type { PostModel } from '../../store/types';
 import PublicationsTable from '../../components/Table';
 import PostDetails from '../../components/Details';
 import { List } from 'lucide-react';
 
 interface TableViewProps {
-  posts: Post[];
-  onEdit: (post: Post) => void;
+  posts: PostModel[];
+  onEdit: (post: PostModel) => void;
   onDelete: (id: number) => void;
 }
 
@@ -16,12 +16,12 @@ const TableView: React.FC<TableViewProps> = ({ posts, onEdit, onDelete }) => {
 
   const selectedPost = posts.find(post => post.id === selectedPostId);
 
-  const handleViewPost = (id: number) => {
+  const showPost = (id: number) => {
     setSelectedPostId(id);
     setIsDetailsOpen(true);
   };
 
-  const handleCloseDetails = () => {
+  const closeDetails = () => {
     setIsDetailsOpen(false);
     setSelectedPostId(null);
   };
@@ -50,10 +50,10 @@ const TableView: React.FC<TableViewProps> = ({ posts, onEdit, onDelete }) => {
         </div>
       </div>
 
-      <PublicationsTable posts={posts} onEdit={onEdit} onDelete={onDelete} onView={handleViewPost}/>
+      <PublicationsTable posts={posts} onEdit={onEdit} onDelete={onDelete} onView={showPost}/>
 
       {selectedPost && (
-        <PostDetails post={selectedPost} onClose={handleCloseDetails} isOpen={isDetailsOpen}/>
+        <PostDetails post={selectedPost} onClose={closeDetails} isOpen={isDetailsOpen}/>
       )}
 
       <div className="flex items-center justify-between pt-4">

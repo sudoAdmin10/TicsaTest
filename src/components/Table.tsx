@@ -1,10 +1,10 @@
 import React from 'react';
 import { Edit2, Trash2, FileText, User } from 'lucide-react';
-import type { Post } from '../store/types';
+import type { PostModel } from '../store/types';
 
 interface TableProps {
-  posts: Post[];
-  onEdit: (post: Post) => void;
+  posts: PostModel[];
+  onEdit: (post: PostModel) => void;
   onDelete: (id: number) => void;
   onView: (id: number) => void;
 }
@@ -46,7 +46,7 @@ const TableComponent: React.FC<TableProps> = ({ posts, onEdit, onDelete, onView 
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100">
-            {posts.map((post, index) => {
+            {posts.map((post) => {
               const truncatedBody = post.body.length > 60 
                 ? post.body.substring(0, 60) + '...' 
                 : post.body;
@@ -55,8 +55,7 @@ const TableComponent: React.FC<TableProps> = ({ posts, onEdit, onDelete, onView 
                 <tr 
                   key={post.id} 
                   className="hover:bg-lime-50/30 transition-colors duration-150 group"
-                   onClick={() => onView(post.id)}
-                >
+                   onClick={() => onView(post.id)}>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
                       <div className="p-2 rounded-lg border border-lime-100 mr-3">
@@ -109,7 +108,7 @@ const TableComponent: React.FC<TableProps> = ({ posts, onEdit, onDelete, onView 
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full bg-lime-400"></div>
             <p className="text-sm text-gray-700">
-              Mostrando <span className="font-semibold text-gray-900">{posts.length}</span> publicaciones
+              Show <span className="font-semibold text-gray-900">{posts.length}</span> posts
             </p>
           </div>
           <div className="text-xs text-gray-400 font-medium">

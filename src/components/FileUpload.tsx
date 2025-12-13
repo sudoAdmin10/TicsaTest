@@ -13,7 +13,7 @@ const FileUploadComponent: React.FC<FileUploadProps> = ({ files, onChange }) => 
   const [dragActive, setDragActive] = useState(false);
   const [error, setError] = useState<string>('');
 
-  const handleFiles = (newFiles: FileList | null) => {
+  const showFiles = (newFiles: FileList | null) => {
     if (!newFiles) return;
 
     setError('');
@@ -38,7 +38,7 @@ const FileUploadComponent: React.FC<FileUploadProps> = ({ files, onChange }) => 
     }
   };
 
-  const handleDrag = (e: React.DragEvent) => {
+  const fileDrag = (e: React.DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
     if (e.type === 'dragenter' || e.type === 'dragover') {
@@ -48,28 +48,28 @@ const FileUploadComponent: React.FC<FileUploadProps> = ({ files, onChange }) => 
     }
   };
 
-  const handleDrop = (e: React.DragEvent) => {
+  const fileDrop = (e: React.DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
     setDragActive(false);
-    handleFiles(e.dataTransfer.files);
+    showFiles(e.dataTransfer.files);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    handleFiles(e.target.files);
+    showFiles(e.target.files);
   };
 
-  const handleRemoveFile = (i: number) => {
+  const deleteFile = (i: number) => {
     const newFiles = files.filter((_, i) => i !== i);
     onChange(newFiles);
     setError('');
   };
 
-  const openFileDialog = () => {
+  const openDialog = () => {
     fileInputRef.current?.click();
   };
 
-  const getFileIcon = (file: File) => {
+  const getIconFile = (file: File) => {
     if (file.type.startsWith('image/')) {
       return <Image className="text-blue-500" size={20} />;
     }
@@ -87,11 +87,11 @@ const FileUploadComponent: React.FC<FileUploadProps> = ({ files, onChange }) => 
   return (
     <div className="space-y-4">
       <div
-        onDragEnter={handleDrag}
-        onDragLeave={handleDrag}
-        onDragOver={handleDrag}
-        onDrop={handleDrop}
-        onClick={openFileDialog}
+        onDragEnter={fileDrag}
+        onDragLeave={fileDrag}
+        onDragOver={fileDrag}
+        onDrop={fileDrop}
+        onClick={openDialog}
         className={`border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-all duration-200 ${
           dragActive
             ? 'border-indigo-500 bg-indigo-50'
@@ -131,7 +131,7 @@ const FileUploadComponent: React.FC<FileUploadProps> = ({ files, onChange }) => 
             {files.map((file, index) => (
               <div key={index}>
                 <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg border border-gray-200 hover:bg-gray-100 transition-colors duration-200">
-                  {getFileIcon(file)}
+                  {getIconFile(file)}
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-medium text-gray-800 truncate">
                       {file.name}
@@ -142,7 +142,7 @@ const FileUploadComponent: React.FC<FileUploadProps> = ({ files, onChange }) => 
                   </div>
                   <button
                     type="button"
-                    onClick={() => handleRemoveFile(index)}
+                    onClick={() => deleteFile(index)}
                     className="p-1.5 text-red-600 hover:bg-red-100 rounded-lg transition-colors duration-200"
                     title="Eliminar archivo">
                     <X size={20} />

@@ -1,10 +1,10 @@
 import React from 'react';
-import type { Post } from '../store/types';
+import type { PostModel } from '../store/types';
 import { Edit2, FileText, Trash2, User, ChevronRight } from 'lucide-react';
 
 interface CardProps {
-  post: Post;
-  onEdit: (post: Post) => void;
+  post: PostModel;
+  onEdit: (post: PostModel) => void;
   onDelete: (id: number) => void;
   onView: (id: number) => void;
 }
@@ -50,7 +50,7 @@ const CardComponent: React.FC<CardProps> = ({ post, onEdit, onDelete, onView }) 
         </p>
         {post.body.length > 50 && (
           <div className="mt-2 inline-flex items-center text-xs text-lime-600 font-medium">
-            <span>Leer más</span>
+            <span>Show more</span>
             <ChevronRight size={12} className="ml-1" />
           </div>
         )}
@@ -62,7 +62,7 @@ const CardComponent: React.FC<CardProps> = ({ post, onEdit, onDelete, onView }) 
             <User size={12} className="text-lime-600" />
           </div>
           <span className="text-xs font-medium text-gray-600">
-            Usuario <span className="text-gray-900">{post.userId}</span>
+            User <span className="text-gray-900">{post.userId}</span>
           </span>
         </div>
         

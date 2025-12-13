@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import type { Post } from '../store/types';
+import type { PostModel } from '../store/types';
 import FileUploadComponent from './FileUpload';
 import { FileText, Save, X, AlertCircle } from 'lucide-react';
 
 interface FormProps {
-  post?: Post | null;
+  post?: PostModel | null;
   onSubmit: (data: { title: string; body: string; files: File[] }) => void;
   onCancel: () => void;
   isOpen: boolean;
@@ -57,7 +57,7 @@ const FormComponent: React.FC<FormProps> = ({ post, onSubmit, onCancel, isOpen }
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const savePost = (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!validateBody()) {
@@ -75,7 +75,7 @@ const FormComponent: React.FC<FormProps> = ({ post, onSubmit, onCancel, isOpen }
     setErrors({});
   };
 
-  const handleFilesChange = (newFiles: File[]) => {
+  const filesChange = (newFiles: File[]) => {
     setFiles(newFiles);
   };
 
@@ -106,7 +106,7 @@ const FormComponent: React.FC<FormProps> = ({ post, onSubmit, onCancel, isOpen }
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="p-6 space-y-6">
+        <form onSubmit={savePost} className="p-6 space-y-6">
           <div>
             <label htmlFor="title" className="block text-sm font-medium text-gray-800 mb-2">
               Title <span className="text-red-500">*</span>
@@ -172,21 +172,19 @@ const FormComponent: React.FC<FormProps> = ({ post, onSubmit, onCancel, isOpen }
             <label className="block text-sm font-medium text-gray-800 mb-3">
               Attachments <span className="text-gray-500 font-normal">(Optional)</span>
             </label>
-            <FileUploadComponent files={files} onChange={handleFilesChange} />
+            <FileUploadComponent files={files} onChange={filesChange} />
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3 pt-6 border-t border-gray-100">
             <button
               type="button"
               onClick={onCancel}
-              className="flex-1 px-6 py-3.5 border border-gray-200 text-gray-700 font-medium rounded-xl hover:bg-gray-50 transition-all duration-200 hover:border-gray-300"
-            >
+              className="flex-1 px-6 py-3.5 border border-gray-200 text-gray-700 font-medium rounded-xl hover:bg-gray-50 transition-all duration-200 hover:border-gray-300" >
               Cancel
             </button>
             <button
               type="submit"
-              className="flex-1 px-6 py-3.5 bg-lime-600 text-white font-medium rounded-xl hover:bg-lime-700 transition-all duration-200 shadow-sm hover:shadow-md flex items-center justify-center gap-2 group"
-            >
+              className="flex-1 px-6 py-3.5 bg-lime-600 text-white font-medium rounded-xl hover:bg-lime-700 transition-all duration-200 shadow-sm hover:shadow-md flex items-center justify-center gap-2 group">
               <Save size={20} className="group-hover:scale-105 transition-transform duration-200" />
               {post ? 'Update Publication' : 'Create Publication'}
             </button>

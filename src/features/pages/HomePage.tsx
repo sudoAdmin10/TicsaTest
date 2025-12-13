@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import type { Post } from '../../store/types';
+import type { PostModel } from '../../store/types';
 import { Grid, List, FileText } from 'lucide-react';
 import TableComponent from '../../components/Table';
 import CardComponent from '../../components/Card';
 import PostDetails from '../../components/Details';
 
 interface HomePageProps {
-  posts: Post[];
-  onEdit: (post: Post) => void;
+  posts: PostModel[];
+  onEdit: (post: PostModel) => void;
   onDelete: (id: number) => void;
 }
 
@@ -20,12 +20,12 @@ const HomePage: React.FC<HomePageProps> = ({ posts, onEdit, onDelete }) => {
 
   const selectedPost = posts.find(post => post.id === selectedPostId);
 
-  const handleViewPost = (id: number) => {
+  const showPost = (id: number) => {
     setSelectedPostId(id);
     setIsDetailsOpen(true);
   };
 
-  const handleCloseDetails = () => {
+  const closeDetails = () => {
     setIsDetailsOpen(false);
     setSelectedPostId(null);
   };
@@ -55,8 +55,7 @@ const HomePage: React.FC<HomePageProps> = ({ posts, onEdit, onDelete }) => {
                 ? 'bg-lime-50 text-lime-700 border border-lime-200 shadow-xs'
                 : 'text-gray-600 hover:bg-gray-50'
             }`}
-            aria-label="Card view"
-          >
+            aria-label="Card view">
             <Grid size={18} />
             <span className="font-medium">Cards</span>
           </button>
@@ -67,8 +66,7 @@ const HomePage: React.FC<HomePageProps> = ({ posts, onEdit, onDelete }) => {
                 ? 'bg-lime-50 text-lime-700 border border-lime-200 shadow-xs'
                 : 'text-gray-600 hover:bg-gray-50'
             }`}
-            aria-label="Table view"
-          >
+            aria-label="Table view">
             <List size={18} />
             <span className="font-medium">Table</span>
           </button>
@@ -87,18 +85,18 @@ const HomePage: React.FC<HomePageProps> = ({ posts, onEdit, onDelete }) => {
             </div>
           ) : (
             posts.map((post) => (
-              <CardComponent key={post.id} post={post} onEdit={onEdit} onDelete={onDelete} onView={handleViewPost} />
+              <CardComponent key={post.id} post={post} onEdit={onEdit} onDelete={onDelete} onView={showPost} />
             ))
           )}
         </div>
       )}
 
       {viewMode === 'table' && (
-        <TableComponent posts={posts}  onEdit={onEdit} onDelete={onDelete} onView={handleViewPost}/>
+        <TableComponent posts={posts}  onEdit={onEdit} onDelete={onDelete} onView={showPost}/>
       )}
 
       {selectedPost && (
-        <PostDetails post={selectedPost} onClose={handleCloseDetails} isOpen={isDetailsOpen}/>
+        <PostDetails post={selectedPost} onClose={closeDetails} isOpen={isDetailsOpen}/>
       )}
 
     </div>

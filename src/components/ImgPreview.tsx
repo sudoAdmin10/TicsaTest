@@ -15,7 +15,6 @@ const ImgPreviewComponent: React.FC<ImgPreviewProps> = ({ file }) => {
       setLoading(false);
       return;
     }
-
     const reader = new FileReader();
 
     reader.onloadstart = () => {
